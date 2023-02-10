@@ -4,12 +4,14 @@ import com.home.prodCate.models.Category;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class ProductDto {
 
     private String name;
     private Double price;
-    private Set<Category> categories = new HashSet<>();
+    private Set<UUID> categories = new HashSet<>();
+    private Set<CategoryDto> categoriesDto = new HashSet<>();
 
     public String getName() {
         return name;
@@ -27,11 +29,19 @@ public class ProductDto {
         this.price = price;
     }
 
-    public Set<Category> getCategories() {
+    public Set<UUID> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(Set<UUID> categories) {
         this.categories = categories;
+    }
+
+    public Set<CategoryDto> getCategoriesDto() {
+        return categoriesDto;
+    }
+
+    public void setCategoriesDto(Set<CategoryDto> categoriesDto) {
+        this.categoriesDto = categoriesDto;
     }
 }

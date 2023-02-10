@@ -29,10 +29,11 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(UUID id, String name, Double price) {
+    public Product(UUID id, String name, Double price, Set<Category> categories) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.categories = categories;
     }
 
     public static long getSerialVersionUID() {
