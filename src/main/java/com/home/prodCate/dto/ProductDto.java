@@ -1,7 +1,5 @@
 package com.home.prodCate.dto;
 
-import com.home.prodCate.models.Category;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;

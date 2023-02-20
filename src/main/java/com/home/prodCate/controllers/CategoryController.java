@@ -1,11 +1,8 @@
 package com.home.prodCate.controllers;
 
 import com.home.prodCate.dto.CategoryDto;
-import com.home.prodCate.dto.ProductDto;
 import com.home.prodCate.models.Category;
-import com.home.prodCate.models.Product;
 import com.home.prodCate.services.CategoryService;
-import com.home.prodCate.services.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +16,6 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private ProductService productService;
 
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;

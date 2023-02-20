@@ -1,7 +1,6 @@
 package com.home.prodCate.services;
 
 import com.home.prodCate.models.Category;
-import com.home.prodCate.models.Product;
 import com.home.prodCate.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 

@@ -9,7 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,56 +25,34 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
+    //NAO ESTA SALVANDO NA MESMA CATEGORIA !!!!!!!!!!!!!!!!!!!
+    public Product save(ProductDto productDto) { //Salva produto e coloca em uma catehoria existente por ID
+        Set<Category> listCategory = categoryRepository.findAllById(productDto.getCategories()).stream().collect(Collectors.toSet());//BUSCA NA LISTA POR ID E COLOCA NO "listCategory"
+        Product product = new Product();
+        BeanUtils.copyProperties(productDto, product);
+        product.setCategories(listCategory);//produto seta todos da listaCategory para ele
+        return productRepository.save(product);
+    }
+
+    public Product saveCategories(ProductDto productDto) {
+        Set<Category> categories = productDto.getCategoriesDto().stream().map(
+                e -> {
+                    Category category = new Category();
+                    BeanUtils.copyProperties(e, category);
+                    return category;
+                }
+        ).collect(Collectors.toSet());
+        Product product = new Product();
+        BeanUtils.copyProperties(productDto, product);
+        product.setCategories(categories);
+        return productRepository.save(product);
+    }
+
     public List<Product> findAll() {//Metodo Buscar todos
         return productRepository.findAll();
     }
 
-    public Product save(ProductDto productDto) {
-        Set<Category> listCategory = categoryRepository.findAllById(productDto.getCategories()).stream().collect(Collectors.toSet());
-        Product product = new Product();
-        BeanUtils.copyProperties(productDto, product);
-        product.setCategories(listCategory);
-        return productRepository.save(product);
+    public Optional<Product> findById(UUID id) {
+        return productRepository.findById(id);
     }
-
-    public Product saveCategories(ProductDto productDto) {//REVER AQI
-        Set<Category> cate1 = productDto.getCategoriesDto().stream().map(
-                e -> {
-                    Category cat = new Category();
-                    BeanUtils.copyProperties(e, cat);
-                    return cat;
-                }
-        ).collect(Collectors.toSet());
-
-        Product product = new Product();
-        BeanUtils.copyProperties(productDto, product);
-        product.setCategories(cate1);
-        return productRepository.save(product);
-    }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
